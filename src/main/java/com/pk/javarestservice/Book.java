@@ -1,18 +1,30 @@
 package com.pk.javarestservice;
 
-import java.time.LocalDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Document(collection = "books")
 public class Book {
+  @Id
+  private String id;
   private String title;
   private String author;
-  private LocalDate date;
-  private Double isbn;
+  private Date date;
+  private String isbn;
 
-  public Book(String title, String author, LocalDate date, Double isbn) {
+  public Book(String title, String author, Date date, String  isbn) {
     this.title = title;
     this.author = author;
     this.date = date;
     this.isbn = isbn;
+  }
+
+  public Book() {
   }
 
   public String getTitle() {
@@ -31,24 +43,24 @@ public class Book {
     this.author = author;
   }
 
-  public LocalDate getDate() {
+  public Date getDate() {
     return date;
   }
 
-  public void setDate(LocalDate date) {
+  public void setDate(Date date) {
     this.date = date;
   }
 
-  public Double getIsbn() {
+  public String getIsbn() {
     return isbn;
   }
 
-  public void setIsbn(Double isbn) {
+  public void setIsbn(String isbn) {
     this.isbn = isbn;
   }
 
   @Override
   public String toString() {
-    return title + " by " + author + "\nISBN: " + isbn +"\nPublished on " + date;
+    return title + " by " + author + " | ISBN: " + isbn +" | Published on " + date;
   }
 }
