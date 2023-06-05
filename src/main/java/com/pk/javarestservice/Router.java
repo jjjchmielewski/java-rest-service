@@ -99,7 +99,7 @@ public class Router {
   @Bean
   public RouterFunction<ServerResponse> orders(OrderHandler orderHandler) {
     return RouterFunctions
-            .route(GET("/orders").and(accept(MediaType.APPLICATION_JSON)), orderHandler::all);
+            .route(GET("/orders/all").and(accept(MediaType.APPLICATION_JSON)), orderHandler::all);
   }
 
   @Bean
