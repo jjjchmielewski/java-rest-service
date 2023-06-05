@@ -89,4 +89,27 @@ public class Router {
     return RouterFunctions
             .route(GET("/cart").and(accept(MediaType.APPLICATION_JSON)), cartHandler::get);
   }
+
+  @Bean
+  public RouterFunction<ServerResponse> cartOrder(CartHandler cartHandler) {
+    return RouterFunctions
+            .route(GET("/cart/order").and(accept(MediaType.APPLICATION_JSON)), cartHandler::order);
+  }
+
+  @Bean
+  public RouterFunction<ServerResponse> orders(OrderHandler orderHandler) {
+    return RouterFunctions
+            .route(GET("/orders").and(accept(MediaType.APPLICATION_JSON)), orderHandler::all);
+  }
+
+  @Bean
+  public RouterFunction<ServerResponse> orderById(OrderHandler orderHandler) {
+    return RouterFunctions
+            .route(
+                    GET("/orders")
+                            .and(queryParam("id", t -> true))
+                            .and(accept(MediaType.APPLICATION_JSON)),
+                    orderHandler::id
+            );
+  }
 }
